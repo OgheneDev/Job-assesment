@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Event Management Dashboard</title>
+</head>
+<body>
+    <div class="mobile-menu">
+        <img src="./images/logo.png" alt="">
+        <button class="btn-menu">
+            <img src="./images/menu.svg" alt="">
+        </button>
+    </div>
+    <div class="container">
+        <div class="side-bar">
+            <div class="logo"><img src="./images/logo.png" alt=""></div>
+            <div class="collapsed-logo"><img src="./images/Replace.svg" alt=""></div>
+            <div class="side-bar-item home"><img src="./images/home.png" alt="">Home</div>
+            <div class="side-bar-item"><img src="./images/events.svg" alt="">Events</div>
+            <div class="side-bar-item"><img src="./images/speakers.svg" alt="">Speakers</div>
+            <div class="side-bar-item"><img src="./images/reports.svg" alt="">Reports</div>
+            <div class="side-bar-item notification">
+                <div class="item">
+                    <img src="./images/notifications.svg" alt="">
+                    Notifications
+                </div>
+                <span>3</span>
+            </div>
+            <div class="side-bar-item"><img src="./images/messages.svg" alt="">Messages</div>
+            <div class="side-bar-item"><img src="./images/settings.svg" alt="">Settings</div>
+            <div class="side-bar-item collapse-btn" id="collapseSidebar"><img src="./images/collapse.svg" alt="">Collapse</div>
+            <div class="side-bar-item dark-mode-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+                <span>Dark mode</span>
+            </div>
+            <div class="profile">
+                <div class="photo"><img src="./images/profile.svg" alt=""></div>
+                <article>
+                    <p>Rudra Devi</p>
+                    <span>rudra.devi@gmail.com</span>
+                </article>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <h3 class="main-header">Welcome! here's your summary</h3>
+            <div class="overview-cards">
+               <div class="card">
+                <div class="span-container">
+                    <span>Total Events</span>
+                    <img src="./images/information.svg" alt="">
+                </div>
+                <div class="stat">
+                    <h4>100,000</h4>
+                    <img src="./images/arrow-right.svg" alt="">
+                    <span>+5.0%</span>
+                </div>
+               </div> 
+               <div class="card">
+                <div class="span-container">
+                    <span>Active Speakers</span>
+                    <img src="./images/information.svg" alt="">
+                </div>
+                <div class="stat">
+                    <h4>25</h4>
+                    <img src="./images/arrow-down.svg" alt="">
+                    <span id="error" class="error">-5.0%</span>
+                </div>
+               </div>
+               <div class="card">
+                <div class="span-container">
+                    <span>Total Registration</span>
+                    <img src="./images/information.svg" alt="">
+                </div>
+                <div class="stat">
+                    <h4>300</h4>
+                    <img src="./images/arrow-right.svg" alt="">
+                    <span>+5.0%</span>
+                </div>
+               </div>
+               <div class="card">
+                <div class="span-container">
+                    <span>Total Revenue</span>
+                    <img src="./images/information.svg" alt="">
+                </div>
+                <div class="stat">
+                    <h4>$500,000</h4>
+                    <img src="./images/arrow-right.svg" alt="">
+                    <span>+5.0%</span>
+                </div>
+               </div>
+            </div>
+    
+           <div class="registration">
+            <h3>Event Registrations per month</h3>
+            <div class="registrations">
+                <div class="chart-container">
+                    <canvas id="eventChart"></canvas>
+                </div>
+    
+                <div class="news-carousel">
+                    <div class="carousel-item active one">
+                        <h4>Latest News & Updates</h4>
+                        <p>Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
+                    </div>
+                    <div class="carousel-item two">
+                        <h4>Latest News & Updates</h4>
+                        <p>Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
+                    </div>
+                    <div class="carousel-item three">
+                        <h4>Latest News & Updates</h4>
+                        <p>Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.</p>
+                    </div>
+                
+                    <div class="carousel-nav prev">&#10094;</div>
+                    <div class="carousel-nav next">&#10095;</div>
+                </div>
+            </div>
+           </div>
+    
+            <div class="events">
+                <h3>Events History</h3>
+                <div class="options">
+                    <div class="filters">
+                        <div class="search-container">
+                         <button class="btn-search"><img src="./images//search.svg" alt=""></button>
+                         <input type="text" placeholder="Search">
+                        </div>
+                        <select name="date" id="date">
+                            <option value="0">Date</option>
+                        </select>
+                        <select name="status" id="status">
+                            <option value="0">Status</option>
+                        </select>
+                        <select name="name" id="name">
+                            <option value="0" id="name">Name</option>
+                        </select>
+                        <div class="text"><p>Displaying 100 results</p></div>
+                    </div>
+                </div>
+    
+                <div class="sort">
+                    <p>Sort:</p>
+                    <select name="sort" id="sort">
+                        <option value="0">Most Recent</option>
+                    </select>
+                    <button class="btn-sort">
+                        <img src="./images/dots.svg" alt="">
+                    </button>
+                    <button class="btn-export">
+                        <img src="./images/export.svg" alt="">
+                    </button>
+                </div>
+            </div>
+    
+            <table class="events-table">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Speaker</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="mobile-events">
+                <!-- Event cards will be generated by JavaScript -->
+            </div>
+
+            <!-- Updated Modal Structure -->
+            <div id="eventModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-head">
+                        <button class="close">×</button>
+                        <h2 class="event-name">Event Name</h2>
+                        <p class="event-date">Event Date</p>
+                        <p class="event-description">Event Description</p>
+                    </div>
+                    
+                    <div class="speakers-section">
+                        <div class="avatar-group">
+                            <img src="./images/Image.png" alt="Speaker" class="speaker-avatar">
+                            <img src="./images/Image2.png" alt="Speaker" class="speaker-avatar">
+                            <img src="./images/Image3.png" alt="Speaker" class="speaker-avatar">
+                        </div>
+                        <div class="stats">
+                            <div class="speaker-info">1 Guest Speaker: <span class="speaker-name"></span></div>
+                            <div>300 Attendees</div>
+                        </div>
+                    </div>
+            
+                    <div class="button-group">
+                        <button class="button edit-button">Edit</button>
+                        <div class="group">
+                            <button class="button delete-button">Delete</button>
+                            <button class="button complete-button">Mark as completed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="footer">
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
