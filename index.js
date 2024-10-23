@@ -365,7 +365,6 @@ function createMobileEventCards() {
     const eventsData = [
         { name: 'Cloud Innovation Summit', status: 'Completed' },
         { name: 'Blockchain Revolution Conference', status: 'Completed' },
-        { name: 'Dr. Peter Smith', date: '2024-11-05' },
         { name: 'AI in Healthcare Symposium', status: 'In Progress' },
         // Add more events as needed
     ];

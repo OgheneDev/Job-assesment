@@ -351,7 +351,7 @@ input:checked + .slider:before {
     color: var(--text-red);
 }
 
-.overview-cards .card h4 {
+.overview-cards .card h3 {
     color: var(--text-color);
 }
 
@@ -492,13 +492,13 @@ input:checked + .slider:before {
     color: var(--text-color);
 }
 
-.sort {
+/*.sort {
     display: flex;
     align-items: center;
     font-size: 13px;
     color: var(--text-color);
     gap: 10px;
-}
+}*/
 
 .sort select {
     width: 120px;
@@ -708,6 +708,19 @@ input:checked + .slider:before {
 /* Add/Update these mobile-specific styles in your CSS file */
 
 @media screen and (max-width: 767px) {
+    .mobile-menu{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      height: 60px;
+    }
+
+    .mobile-menu button{
+        border: none;
+        background: none;
+    }
+
    .side-bar{
     display: none;
    }
@@ -767,6 +780,8 @@ input:checked + .slider:before {
         flex-direction: column;
         width: 100%;
         gap: 8px;
+        align-items: start;
+        font-weight: bold;
     }
 
     .events .search-container {
@@ -781,18 +796,59 @@ input:checked + .slider:before {
         width: 100%;
         margin: 0;
         padding: 12px;
-        background-color: white;
-        border-radius: 12px;
     }
 
     .sort {
         width: 100%;
-        justify-content: space-between;
         margin-top: 16px;
+        flex-direction: column;
+    }
+
+    .sort .p{
+        margin-bottom: 20px;
+    }
+
+    .sort div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sort div select{
+        width: fit-content;
     }
 
     .events-table{
         display: none;
+    }
+
+    .mobile-events {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    /*.event-card {
+        padding: 16px;
+    }*/
+
+    .event-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .event-card-title {
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .event-card .status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
     }
 }
 
