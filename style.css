@@ -755,6 +755,12 @@ input:checked + .slider:before {
     color: var(--text-color);
 }
 
+.pagination-buttons .number.active{
+    background-color: #8576FF;
+    color: white;
+    border-radius: 50%;
+}
+
 .pagination-buttons .btn-prev{
     background-color: var(--pagination-bg);
     color: var(--pagination-color);
