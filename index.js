@@ -109,6 +109,19 @@ const eventsData = [
     { name: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' }
 ];
 
+const eventDescriptions = {
+    'Cloud Innovation Summit': 'An insightful summit showcasing the latest innovations in cloud computing technologies.',
+    'Blockchain Revolution Conference': 'A conference exploring the future of blockchain technology and decentralized applications.',
+    'AI in Healthcare Symposium': 'A symposium focused on how artificial intelligence is transforming the healthcare industry.',
+    'Future of Fintech Forum': 'A forum that discusses cutting-edge fintech solutions and financial technologies.',
+    'Data Analytics in Business': 'An event covering how data analytics is being used to drive business success.',
+    'Sustainable Energy Expo': 'An expo showcasing the latest innovations and trends in sustainable energy solutions.',
+    'Web3 Interfaces Workshop': 'A hands-on workshop exploring Web3 technologies and decentralized interfaces.',
+    'Cybersecurity for Startups': 'A comprehensive session on cybersecurity strategies specifically for startups.',
+    'Smart Cities Forum': 'A forum discussing the integration of technology in urban planning and smart city development.',
+    'Tech Safari Mixer': 'A networking event for tech enthusiasts to meet, exchange ideas, and collaborate on innovative projects.'
+};
+
 // Initialize filter states
 let currentFilters = {
     search: '',
@@ -128,7 +141,6 @@ function createMobileEventCards() {
         const table = document.createElement('table');
         table.className = 'mobile-events-table';
         
-        // Add table header
         const thead = document.createElement('thead');
         thead.innerHTML = `
             <tr>
@@ -144,7 +156,6 @@ function createMobileEventCards() {
             const row = document.createElement('tr');
             const statusClass = event.status === 'Completed' ? 'completed' : 'in-progress';
             
-            // Create the main row with just name and status
             const mainRow = document.createElement('tr');
             mainRow.className = 'main-row';
             mainRow.innerHTML = `
@@ -166,31 +177,28 @@ function createMobileEventCards() {
                 </td>
             `;
 
-            // Create the details row (hidden by default)
             const detailsRow = document.createElement('tr');
             detailsRow.className = 'details-row hidden';
             detailsRow.innerHTML = `
                 <td colspan="2">
                     <div class="mobile-event-details">
-                    <div class="event-speaker">Speaker: ${event.speaker}</div>
+                        <div class="event-speaker">Speaker: ${event.speaker}</div>
                         <div class="event-date">Date: ${event.date}</div>
                     </div>
                 </td>
             `;
             
-            // Add click handlers
             const dropdownToggle = mainRow.querySelector('.dropdown-toggle');
-            
             dropdownToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 dropdownToggle.classList.toggle('active');
                 detailsRow.classList.toggle('hidden');
             });
             
-            // Add modal functionality to main row
+            // Populate modal when mainRow is clicked
             mainRow.addEventListener('click', (e) => {
                 if (!e.target.closest('.dropdown-toggle')) {
-                    showEventModal(event);
+                    showEventModal(event);  // Pass event object to the modal
                 }
             });
             
@@ -202,6 +210,7 @@ function createMobileEventCards() {
         mobileEvents.appendChild(table);
     }
 }
+
 
 // Populate filter dropdowns
 function initializeFilters() {
@@ -339,11 +348,12 @@ function showEventModal(event) {
 
     modalEventName.textContent = event.name;
     modalEventDate.textContent = event.date;
-    modalEventDescription.textContent = 'Event Description';
+    modalEventDescription.textContent = eventDescriptions[event.name]; // Use the event description
     modalSpeakerName.textContent = event.speaker;
 
     modal.style.display = 'block';
 }
+
 
 function closeModal() {
     modal.style.display = 'none';

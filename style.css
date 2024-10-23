@@ -226,6 +226,10 @@ body, button, input, select {
     width: 25px;
 }
 
+.side-bar.collapsed .side-bar-item.home img{
+    width: 25px;
+}
+
 .side-bar.collapsed .logo {
     display: none;
 }
@@ -787,6 +791,7 @@ input:checked + .slider:before {
       align-items: center;
       padding: 20px;
       height: 60px;
+      border-bottom: 1px solid var(--border-light);
     }
 
     .mobile-menu button{
@@ -794,15 +799,17 @@ input:checked + .slider:before {
         background: none;
     }
 
-    .btn-close{
-        font-size: 16px;
-        cursor: pointer;
-        color: var(--close);
-        background: var(--close-bg);
-        border: 1px solid var(--border-light);
-        border-radius: 50%;
-        padding: 1px 6px 3px 6px;
-    }
+    /* Higher specificity targeting */
+.mobile-menu .btn-close {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--close);
+    background: var(--close-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    padding: 1px 6px 3px 6px;
+}
+
 
     .btn-close.open{
         display: block;
@@ -831,6 +838,10 @@ input:checked + .slider:before {
    }
 
    .side-bar .logo{
+    display: none;
+   }
+
+   .side-bar.collapsed .collapsed-logo{
     display: none;
    }
 
@@ -1047,7 +1058,23 @@ input:checked + .slider:before {
     font-size: 0;
 }
 
+.button-group{
+    flex-direction: column;
+    gap: 5px;
+}
 
+.modal-content{
+    width: 90%;
+}
+
+.edit-button{
+    width: 100%;
+}
+
+.group{
+    flex-direction: column;
+    gap: 5px;
+}
 
 
 }
