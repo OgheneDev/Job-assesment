@@ -48,6 +48,10 @@
     --pagination-bg: #E2E8F0;
     --pagination-border: #E2E8F0;
     --pagination-right-bg: none;
+    --row-hover: #F2F2F7;
+    --close-menu: #334155;
+    --close-menu-bg: none;
+    
 }
 
 /* Dark theme variables */
@@ -75,6 +79,9 @@
     --pagination-bg: #484554;
     --pagination-border: none;
     --pagination-right-bg: #484554;
+    --row-hover: #383544;
+    --close-menu: #484554;
+    --close-menu-bg: #ffffff;
 }
 
 /* Global reset */
@@ -302,7 +309,8 @@ input:checked + .slider:before {
 .dark-theme .btn-sort img,
 .dark-theme .btn-export img,
 .dark-theme .side-bar-item.home img, 
-.dark-theme .overview-cards .card .span-container img{
+.dark-theme .overview-cards .card .span-container img
+.dark-theme .mobile-menu .btn-menu{
     filter: brightness(0) invert(1); /* This inverts the image colors */
 }
 
@@ -782,7 +790,10 @@ input:checked + .slider:before {
     display: none;
 }
 
-/* Add/Update these mobile-specific styles in your CSS file */
+.bottom-bar{
+  display: none;
+}
+
 
 @media screen and (max-width: 767px) {
     .mobile-menu{
@@ -792,6 +803,12 @@ input:checked + .slider:before {
       padding: 20px;
       height: 60px;
       border-bottom: 1px solid var(--border-light);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 10;
+      background-color: var(--side-bar-bg);
     }
 
     .mobile-menu button{
@@ -800,15 +817,22 @@ input:checked + .slider:before {
     }
 
     /* Higher specificity targeting */
-.mobile-menu .btn-close {
-    font-size: 16px;
-    cursor: pointer;
-    color: var(--close);
-    background: var(--close-bg);
-    border: 1px solid var(--border-light);
-    border-radius: 50%;
-    padding: 1px 6px 3px 6px;
-}
+    .mobile-menu .btn-close {
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--close-menu); /* Text color */
+        background: var(--close-menu-bg); /* Background color */
+        border: 1px solid var(--border-light); /* Border color */
+        border-radius: 50%; /* Make it a perfect circle */
+        padding: 0; /* Remove padding */
+        width: 35px; /* Set the width to match height */
+        height: 35px; /* Set the height to control the button size */
+        display: flex none;
+        justify-content: center;
+        align-items: center; /* Ensure the "x" is vertically centered */
+        font-weight: bold;
+    }
+    
 
 
     .btn-close.open{
@@ -855,7 +879,7 @@ input:checked + .slider:before {
    }
 
    .main-content{
-    padding: 20px;
+    padding: 80px 20px 20px 20px;
    }
 
    .overview-cards{
@@ -976,10 +1000,11 @@ input:checked + .slider:before {
 .main-row {
     cursor: pointer;
     font-size: 12px !important;
+    background-color: var(--side-bar-bg);
 }
 
 .main-row:hover {
-    background-color: #f9f9f9;
+    background-color: var(--row-hover);
 }
 
 .status-cell {
@@ -1015,12 +1040,12 @@ input:checked + .slider:before {
 
 .dropdown-toggle.active {
     transform: rotate(180deg);
-    background-color: #f0f0f0;
+    background-color: none;
     border-radius: 4px;
 }
 
 .details-row {
-    background-color: #f9f9f9;
+    background-color: var(--row-hover);
 }
 
 .details-row.hidden {
@@ -1074,6 +1099,27 @@ input:checked + .slider:before {
 .group{
     flex-direction: column;
     gap: 5px;
+}
+
+.bottom-bar{
+    display: flex;
+    margin: 30px 0 50px 0;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.bottom-bar .bottom-bar-item{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--text-color);
+    align-items: center;
+}
+
+.bottom-bar .bottom-bar-item img{
+    width: 20px;
+
 }
 
 
