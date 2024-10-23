@@ -172,8 +172,8 @@ function createMobileEventCards() {
             detailsRow.innerHTML = `
                 <td colspan="2">
                     <div class="mobile-event-details">
+                    <div class="event-speaker">Speaker: ${event.speaker}</div>
                         <div class="event-date">Date: ${event.date}</div>
-                        <div class="event-speaker">Speaker: ${event.speaker}</div>
                     </div>
                 </td>
             `;
