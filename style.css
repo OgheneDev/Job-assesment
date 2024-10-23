@@ -888,6 +888,17 @@ input:checked + .slider:before {
     padding: 12px;
 }
 
+.status.completed{
+    color: var(--text-white);
+    background-color: var(--text-green);
+}
+
+.status.in-progress{
+    color: var(--text-white);
+    background-color: var(--text-blue);
+    width: 100px;
+}
+
 .mobile-event-header {
     display: flex;
     align-items: center;
