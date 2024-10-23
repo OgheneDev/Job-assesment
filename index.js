@@ -97,16 +97,106 @@ window.addEventListener('orientationchange', () => {
 
 // Enhanced event data
 const eventsData = [
-    { name: 'Cloud Innovation Summit', date: '2024-10-15', speaker: 'Jane Doe', status: 'Completed' },
-    { name: 'Blockchain Revolution Conference', date: '2024-11-05', speaker: 'Dr. Peter Smith', status: 'In Progress' },
-    { name: 'AI in Healthcare Symposium', date: '2024-12-01', speaker: 'Dr. Aisha Malik', status: 'Completed' },
-    { name: 'Future of Fintech Forum', date: '2024-10-25', speaker: 'John Lee', status: 'Completed' },
-    { name: 'Data Analytics in Business', date: '2024-11-12', speaker: 'Rachel Moore', status: 'Completed' },
-    { name: 'Sustainable Energy Expo', date: '2024-09-28', speaker: 'Prof. Alan Green', status: 'Completed' },
-    { name: 'Web3 Interfaces Workshop', date: '2024-10-10', speaker: 'Kevin Adams', status: 'In Progress' },
-    { name: 'Cybersecurity for Startups', date: '2024-11-19', speaker: 'Emily Zhang', status: 'Completed' },
-    { name: 'Smart Cities Forum', date: '2024-10-18', speaker: 'Dr. Maria Hernandez', status: 'In Progress' },
-    { name: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' }
+    { 
+        name: 'Cloud Innovation Summit', 
+        date: '2024-10-15', 
+        guests: [
+            { name: 'Jane Doe', role: 'Cloud Architect' },
+            { name: 'Michael Chen', role: 'DevOps Lead' },
+            { name: 'Sarah Miller', role: 'Innovation Director' }
+        ], 
+        status: 'Completed' 
+    },
+    { 
+        name: 'Blockchain Revolution Conference', 
+        date: '2024-11-05', 
+        guests: [
+            { name: 'Dr. Peter Smith', role: 'Blockchain Researcher' },
+            { name: 'Lisa Wang', role: 'Crypto Strategist' },
+            { name: 'Alex Kumar', role: 'DeFi Expert' }
+        ], 
+        status: 'In Progress' 
+    },
+    { 
+        name: 'AI in Healthcare Symposium', 
+        date: '2024-12-01', 
+        guests: [
+            { name: 'Dr. Aisha Malik', role: 'AI Research Lead' },
+            { name: 'Dr. James Wilson', role: 'Healthcare Innovation' },
+            { name: 'Emma Thompson', role: 'Medical AI Specialist' }
+        ], 
+        status: 'Completed' 
+    },
+    { 
+        name: 'Future of Fintech Forum', 
+        date: '2024-10-25', 
+        guests: [
+            { name: 'John Lee', role: 'Fintech Innovation' },
+            { name: 'Maria Garcia', role: 'Digital Banking' },
+            { name: 'Robert Chen', role: 'Payment Systems' }
+        ], 
+        status: 'Completed' 
+    },
+    { 
+        name: 'Data Analytics in Business', 
+        date: '2024-11-12', 
+        guests: [
+            { name: 'Rachel Moore', role: 'Data Science Lead' },
+            { name: 'David Kim', role: 'Business Analytics' },
+            { name: 'Sophie Martin', role: 'ML Engineer' }
+        ], 
+        status: 'Completed' 
+    },
+    { 
+        name: 'Sustainable Energy Expo', 
+        date: '2024-09-28', 
+        guests: [
+            { name: 'Prof. Alan Green', role: 'Sustainability Expert' },
+            { name: 'Dr. Nina Patel', role: 'Renewable Energy' },
+            { name: 'Thomas Anderson', role: 'Clean Tech' }
+        ], 
+        status: 'Completed' 
+    },
+    { 
+        name: 'Web3 Interfaces Workshop', 
+        date: '2024-10-10', 
+        guests: [
+            { name: 'Kevin Adams', role: 'Web3 Developer' },
+            { name: 'Julia Ross', role: 'UX Designer' },
+            { name: 'Marcus Lee', role: 'dApp Architect' }
+        ], 
+        status: 'In Progress' 
+    },
+    { 
+        name: 'Cybersecurity for Startups', 
+        date: '2024-11-19', 
+        guests: [
+            { name: 'Emily Zhang', role: 'Security Expert' },
+            { name: 'Ryan Phillips', role: 'Threat Analyst' },
+            { name: 'Sophia Chen', role: 'InfoSec Lead' }
+        ], 
+        status: 'Completed' 
+    },
+    { 
+        name: 'Smart Cities Forum', 
+        date: '2024-10-18', 
+        guests: [
+            { name: 'Dr. Maria Hernandez', role: 'Urban Planning' },
+            { name: 'Paul Johnson', role: 'IoT Solutions' },
+            { name: 'Linda Kim', role: 'Smart Infrastructure' }
+        ], 
+        status: 'In Progress' 
+    },
+    { 
+        name: 'Tech Safari Mixer', 
+        date: '2024-09-30', 
+        guests: [
+            { name: 'Mark Stevens', role: 'Tech Innovator' },
+            { name: 'Priya Patel', role: 'Startup Founder' },
+            { name: 'Carlos Rodriguez', role: 'VC Partner' }
+        ], 
+        status: 'In Progress' 
+    }
 ];
 
 const eventDescriptions = {
@@ -153,7 +243,6 @@ function createMobileEventCards() {
         const tbody = document.createElement('tbody');
         
         filteredEvents.forEach(event => {
-            const row = document.createElement('tr');
             const statusClass = event.status === 'Completed' ? 'completed' : 'in-progress';
             
             const mainRow = document.createElement('tr');
@@ -182,8 +271,8 @@ function createMobileEventCards() {
             detailsRow.innerHTML = `
                 <td colspan="2">
                     <div class="mobile-event-details">
-                        <div class="event-speaker">Speaker: ${event.speaker}</div>
                         <div class="event-date">Date: ${event.date}</div>
+                        <div class="event-guests">Guests: ${event.guests.map(guest => guest.name).join(', ')}</div>
                     </div>
                 </td>
             `;
@@ -195,10 +284,9 @@ function createMobileEventCards() {
                 detailsRow.classList.toggle('hidden');
             });
             
-            // Populate modal when mainRow is clicked
             mainRow.addEventListener('click', (e) => {
                 if (!e.target.closest('.dropdown-toggle')) {
-                    showEventModal(event);  // Pass event object to the modal
+                    showEventModal(event);
                 }
             });
             
@@ -242,9 +330,11 @@ function filterEvents() {
         const searchTerm = currentFilters.search.toLowerCase();
         filteredEvents = filteredEvents.filter(event => 
             event.name.toLowerCase().includes(searchTerm) ||
-            event.speaker.toLowerCase().includes(searchTerm)
+            event.guests.some(guest => guest.name.toLowerCase().includes(searchTerm)) // Fix to search through guest names
         );
     }
+    
+    
 
     if (currentFilters.date !== '0') {
         filteredEvents = filteredEvents.filter(event => {
@@ -289,7 +379,7 @@ function updateTable() {
         row.innerHTML = `
             <td>${event.name}</td>
             <td>${event.date}</td>
-            <td>${event.speaker}</td>
+            <td>${event.guests.map(guest => guest.name).join(', ')}</td>
             <td><span class="status ${statusClass}"><span class="dot"></span>${event.status}</span></td>
         `;
         row.addEventListener('click', () => showEventModal(event));
@@ -341,18 +431,28 @@ const deleteButton = document.querySelector('.delete-button');
 const completeButton = document.querySelector('.complete-button');
 
 function showEventModal(event) {
-    const modalEventName = document.querySelector('.event-name');
-    const modalEventDate = document.querySelector('.event-date');
-    const modalEventDescription = document.querySelector('.event-description');
-    const modalSpeakerName = document.querySelector('.speaker-name');
+    const modalEventName = document.querySelector('#eventModal .event-name');
+    const modalEventDate = document.querySelector('#eventModal .event-date');
+    const modalEventDescription = document.querySelector('#eventModal .event-description');
+    const modalGuestsContainer = document.querySelector('#eventModal .speaker-name');
 
     modalEventName.textContent = event.name;
     modalEventDate.textContent = event.date;
-    modalEventDescription.textContent = eventDescriptions[event.name]; // Use the event description
-    modalSpeakerName.textContent = event.speaker;
+    modalEventDescription.textContent = eventDescriptions[event.name];
 
+    // Update guests display with correct pluralization
+    const guestCount = event.guests.length;
+    const guestLabel = guestCount === 1 ? 'guest speaker' : 'guest speakers';
+    modalGuestsContainer.innerHTML = `<strong>${guestCount}</strong> ${guestLabel}:` + 
+        event.guests.map(guest => 
+            `<div class="guest-info">
+                <strong>${guest.name}</strong> - ${guest.role}
+            </div>`
+        ).join('');
+    
     modal.style.display = 'block';
 }
+
 
 
 function closeModal() {
