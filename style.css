@@ -744,12 +744,14 @@ input:checked + .slider:before {
 .pagination-buttons .btn-prev{
     background-color: var(--pagination-bg);
     color: var(--pagination-color);
+    font-size: 10px;
 }
 
 .pagination-buttons .btn-next{
     border: 1px solid var(--border-light);
     color: var(--pagination-color);
     background-color: var(--pagination-right-bg);
+    font-size: 10px;
 }
 
 .pagination-buttons button{
