@@ -617,7 +617,7 @@ input:checked + .slider:before {
 }
 
 .event-name {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-color);
     margin: 0 0 4px 0;
