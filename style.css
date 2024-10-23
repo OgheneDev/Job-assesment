@@ -309,9 +309,11 @@ input:checked + .slider:before {
 .dark-theme .btn-sort img,
 .dark-theme .btn-export img,
 .dark-theme .side-bar-item.home img, 
-.dark-theme .overview-cards .card .span-container img
-.dark-theme .mobile-menu .btn-menu{
-    filter: brightness(0) invert(1); /* This inverts the image colors */
+.dark-theme .overview-cards .card .span-container img,
+.dark-theme .bottom-bar-item img, /* Target bottom-bar-item images */
+.dark-theme .mobile-menu .btn-menu img /* Target the btn-menu image directly */
+{
+    filter: brightness(0) invert(1); /* This inverts the image colors to white */
 }
 
 .main-content .main-header {
@@ -1101,13 +1103,27 @@ input:checked + .slider:before {
     gap: 5px;
 }
 
-.bottom-bar{
+.bottom-bar {
     display: flex;
     margin: 30px 0 50px 0;
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
+    border-top: 1px solid var(--border-light); /* Default 1px border */
+    padding-top: 20px;
+    position: relative; /* Position relative to allow the pseudo-element */
 }
+
+.bottom-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Align at the top to mimic the top border */
+    left: 0;
+    width: 20%; /* The first 20% */
+    height: 5px; /* 5px height */
+    background-color: #8576FF; /* Color for the first 20% */
+}
+
 
 .bottom-bar .bottom-bar-item{
     display: flex;
@@ -1115,6 +1131,10 @@ input:checked + .slider:before {
     gap: 10px;
     color: var(--text-color);
     align-items: center;
+}
+
+.bottom-bar .bottom-bar-item.home{
+    color: #8576FF;
 }
 
 .bottom-bar .bottom-bar-item img{
