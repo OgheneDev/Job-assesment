@@ -7,6 +7,7 @@ const attendeesData = {
     ],
 };
 
+// Chart initialization
 const ctx = document.getElementById('eventChart').getContext('2d');
 
 const isMobile = () => window.innerWidth <= 767;
@@ -30,7 +31,7 @@ const eventChart = new Chart(ctx, {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                display: false, // Always hide legend to save space
+                display: false,
             },
             tooltip: {
                 enabled: true,
@@ -47,14 +48,13 @@ const eventChart = new Chart(ctx, {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 200, // Show more y-axis values
-                    maxTicksLimit: 8, // Increase number of y-axis ticks
+                    stepSize: 200,
+                    maxTicksLimit: 8,
                     callback: function(value) {
-                        // Show actual numbers instead of K format
                         return value;
                     },
                     font: {
-                        size: 10 // Smaller font size for y-axis
+                        size: 10
                     }
                 },
                 grid: {
@@ -69,10 +69,10 @@ const eventChart = new Chart(ctx, {
                 ticks: {
                     maxRotation: 45,
                     minRotation: 45,
-                    autoSkip: false, // Don't auto-skip labels
-                    maxTicksLimit: 12, // Show all months
+                    autoSkip: false,
+                    maxTicksLimit: 12,
                     font: {
-                        size: 10 // Smaller font size for x-axis
+                        size: 10
                     }
                 }
             }
@@ -94,8 +94,6 @@ window.addEventListener('orientationchange', () => {
         eventChart.resize();
     }, 100);
 });
-
-// Add this CSS for the chart container
 
 // Enhanced event data
 const eventsData = [
@@ -120,9 +118,93 @@ let currentFilters = {
     sort: '0'
 };
 
+function createMobileEventCards() {
+    const mobileEvents = document.querySelector('.mobile-events');
+    
+    if (window.innerWidth <= 767 && mobileEvents) {
+        const filteredEvents = filterEvents();
+        mobileEvents.innerHTML = '';
+        
+        const table = document.createElement('table');
+        table.className = 'mobile-events-table';
+        
+        // Add table header
+        const thead = document.createElement('thead');
+        thead.innerHTML = `
+            <tr>
+                <th class="mobile-th">Name</th>
+                <th class="mobile-th">Status</th>
+            </tr>
+        `;
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        
+        filteredEvents.forEach(event => {
+            const row = document.createElement('tr');
+            const statusClass = event.status === 'Completed' ? 'completed' : 'in-progress';
+            
+            // Create the main row with just name and status
+            const mainRow = document.createElement('tr');
+            mainRow.className = 'main-row';
+            mainRow.innerHTML = `
+                <td class="mobile-event-row">
+                    <div class="mobile-event-header">
+                        <button class="dropdown-toggle">
+                            <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12">
+                                <path d="M2 4L6 8L10 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <span class="event-name">${event.name}</span>
+                    </div>
+                </td>
+                <td class="status-cell">
+                    <span class="status ${statusClass}">
+                        <span class="dot"></span>
+                        ${event.status}
+                    </span>
+                </td>
+            `;
+
+            // Create the details row (hidden by default)
+            const detailsRow = document.createElement('tr');
+            detailsRow.className = 'details-row hidden';
+            detailsRow.innerHTML = `
+                <td colspan="2">
+                    <div class="mobile-event-details">
+                        <div class="event-date">Date: ${event.date}</div>
+                        <div class="event-speaker">Speaker: ${event.speaker}</div>
+                    </div>
+                </td>
+            `;
+            
+            // Add click handlers
+            const dropdownToggle = mainRow.querySelector('.dropdown-toggle');
+            
+            dropdownToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdownToggle.classList.toggle('active');
+                detailsRow.classList.toggle('hidden');
+            });
+            
+            // Add modal functionality to main row
+            mainRow.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown-toggle')) {
+                    showEventModal(event);
+                }
+            });
+            
+            tbody.appendChild(mainRow);
+            tbody.appendChild(detailsRow);
+        });
+        
+        table.appendChild(tbody);
+        mobileEvents.appendChild(table);
+    }
+}
+
 // Populate filter dropdowns
 function initializeFilters() {
-    // Populate date dropdown
     const dateSelect = document.getElementById('date');
     const dates = [...new Set(eventsData.map(event => {
         const date = new Date(event.date);
@@ -132,13 +214,11 @@ function initializeFilters() {
     dateSelect.innerHTML = '<option value="0">Date</option>' + 
         dates.map(date => `<option value="${date}">${date}</option>`).join('');
 
-    // Populate status dropdown
     const statusSelect = document.getElementById('status');
     const statuses = [...new Set(eventsData.map(event => event.status))];
     statusSelect.innerHTML = '<option value="0">Status</option>' + 
         statuses.map(status => `<option value="${status}">${status}</option>`).join('');
 
-    // Populate name dropdown (event names)
     const nameSelect = document.getElementById('name');
     const names = [...new Set(eventsData.map(event => event.name))];
     nameSelect.innerHTML = '<option value="0">Name</option>' + 
@@ -149,7 +229,6 @@ function initializeFilters() {
 function filterEvents() {
     let filteredEvents = [...eventsData];
 
-    // Apply search filter
     if (currentFilters.search) {
         const searchTerm = currentFilters.search.toLowerCase();
         filteredEvents = filteredEvents.filter(event => 
@@ -158,7 +237,6 @@ function filterEvents() {
         );
     }
 
-    // Apply date filter
     if (currentFilters.date !== '0') {
         filteredEvents = filteredEvents.filter(event => {
             const eventDate = new Date(event.date);
@@ -167,21 +245,18 @@ function filterEvents() {
         });
     }
 
-    // Apply status filter
     if (currentFilters.status !== '0') {
         filteredEvents = filteredEvents.filter(event => 
             event.status === currentFilters.status
         );
     }
 
-    // Apply name filter
     if (currentFilters.name !== '0') {
         filteredEvents = filteredEvents.filter(event => 
             event.name === currentFilters.name
         );
     }
 
-    // Apply sorting
     if (currentFilters.sort === 'Most Recent') {
         filteredEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
@@ -194,13 +269,10 @@ function updateTable() {
     const tableBody = document.querySelector('.events-table tbody');
     const filteredEvents = filterEvents();
     
-    // Update results count
     document.querySelector('.text p').textContent = `Displaying ${filteredEvents.length} results`;
 
-    // Clear existing table rows
     tableBody.innerHTML = '';
 
-    // Add filtered events to table
     filteredEvents.forEach(event => {
         const row = document.createElement('tr');
         const statusClass = event.status === 'Completed' ? 'completed' : 'in-progress';
@@ -214,9 +286,11 @@ function updateTable() {
         row.addEventListener('click', () => showEventModal(event));
         tableBody.appendChild(row);
     });
+
+    createMobileEventCards();
 }
 
-// Sidebar collapse functionality
+// Sidebar functionality
 document.getElementById('collapseSidebar').addEventListener('click', function() {
     const sidebar = document.querySelector('.side-bar');
     sidebar.classList.toggle('collapsed');
@@ -271,26 +345,20 @@ function showEventModal(event) {
     modal.style.display = 'block';
 }
 
-// Close modal handlers
 function closeModal() {
     modal.style.display = 'none';
 }
 
 closeBtn.addEventListener('click', closeModal);
 
-// Delete button handler
 deleteButton.addEventListener('click', () => {
-    // Add delete functionality here
     closeModal();
 });
 
-// Complete button handler
 completeButton.addEventListener('click', () => {
-    // Add complete functionality here
     closeModal();
 });
 
-// Close modal when clicking outside
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
         closeModal();
@@ -299,55 +367,42 @@ window.addEventListener('click', (event) => {
 
 // Set up event listeners for filters
 function initializeEventListeners() {
-    // Search input listener
     const searchInput = document.querySelector('.search-container input');
     searchInput.addEventListener('input', (e) => {
         currentFilters.search = e.target.value;
         updateTable();
     });
 
-    // Date filter listener
     document.getElementById('date').addEventListener('change', (e) => {
         currentFilters.date = e.target.value;
         updateTable();
     });
 
-    // Status filter listener
     document.getElementById('status').addEventListener('change', (e) => {
         currentFilters.status = e.target.value;
         updateTable();
     });
 
-    // Name filter listener
     document.getElementById('name').addEventListener('change', (e) => {
         currentFilters.name = e.target.value;
         updateTable();
     });
 
-    // Sort listener
     document.getElementById('sort').addEventListener('change', (e) => {
         currentFilters.sort = e.target.value;
         updateTable();
     });
 }
 
-// Initialize everything when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initializeFilters();
-    initializeEventListeners();
-    updateTable();
-});
-
+// Dark mode functionality
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
     
-    // Check for saved theme preference
     if (localStorage.getItem('darkMode') === 'enabled') {
         document.body.classList.add('dark-theme');
         darkModeToggle.checked = true;
     }
 
-    // Toggle dark mode
     darkModeToggle.addEventListener('change', () => {
         if (darkModeToggle.checked) {
             document.body.classList.add('dark-theme');
@@ -359,49 +414,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add this to your existing JavaScript file
+// Mobile menu functionality
+const btnMenu = document.querySelector('.btn-menu');
+const sidebar = document.querySelector('.side-bar');
 
-function createMobileEventCards() {
-    const eventsData = [
-        { name: 'Cloud Innovation Summit', status: 'Completed' },
-        { name: 'Blockchain Revolution Conference', status: 'Completed' },
-        { name: 'AI in Healthcare Symposium', status: 'In Progress' },
-        // Add more events as needed
-    ];
+btnMenu.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+});
 
-    const mobileEvents = document.querySelector('.mobile-events');
-    
-    // Only proceed if we're in mobile view and the container exists
-    if (window.innerWidth <= 767 && mobileEvents) {
-        mobileEvents.innerHTML = ''; // Clear existing cards
-        
-        eventsData.forEach(event => {
-            const card = document.createElement('div');
-            card.className = 'event-card';
-            
-            const statusClass = event.status === 'Completed' ? 'completed' : 'in-progress';
-            
-            card.innerHTML = `
-                <div class="event-card-header">
-                    <span class="event-card-title">${event.name}</span>
-                    ${event.status ? `
-                        <div class="status ${statusClass}">
-                            <span class="dot"></span>
-                            ${event.status}
-                        </div>
-                    ` : ''}
-                </div>
-                ${event.date ? `<div class="event-date">${event.date}</div>` : ''}
-            `;
-            
-            mobileEvents.appendChild(card);
-        });
-    }
-}
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    initializeFilters();
+    initializeEventListeners();
+    updateTable();
+    createMobileEventCards();
+});
 
-// Call on load and resize
-window.addEventListener('load', createMobileEventCards);
-window.addEventListener('resize', createMobileEventCards);
+// Update mobile view on window resize
+window.addEventListener('resize', () => {
+    createMobileEventCards();
+});
 
 
 

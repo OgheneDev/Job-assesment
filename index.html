@@ -126,42 +126,46 @@
             </div>
            </div>
     
-            <div class="events">
-                <h3>Events History</h3>
-                <div class="options">
-                    <div class="filters">
-                        <div class="search-container">
-                         <button class="btn-search"><img src="./images//search.svg" alt=""></button>
-                         <input type="text" placeholder="Search">
+            <div class="event-container">
+                <h3>Event History</h3>
+
+                <div class="events">
+                
+                    <div class="options">
+                        <div class="filters">
+                            <div class="search-container">
+                             <button class="btn-search"><img src="./images//search.svg" alt=""></button>
+                             <input type="text" placeholder="Search">
+                            </div>
+                            <select name="date" id="date">
+                                <option value="0">Date</option>
+                            </select>
+                            <select name="status" id="status">
+                                <option value="0">Status</option>
+                            </select>
+                            <select name="name" id="name">
+                                <option value="0" id="name">Name</option>
+                            </select>
+                            <div class="text"><p>Displaying 100 results</p></div>
                         </div>
-                        <select name="date" id="date">
-                            <option value="0">Date</option>
-                        </select>
-                        <select name="status" id="status">
-                            <option value="0">Status</option>
-                        </select>
-                        <select name="name" id="name">
-                            <option value="0" id="name">Name</option>
-                        </select>
-                        <div class="text"><p>Displaying 100 results</p></div>
                     </div>
-                </div>
-    
-                <div class="sort">
-                   <div class="p">
-                    <p>Sort:</p>
-                    <select name="sort" id="sort">
-                        <option value="0">Most Recent</option>
-                    </select>
-                   </div>
-                    <div>
-                        <button class="btn-sort">
-                            <img src="./images/dots.svg" alt="">
-                        </button>
-                        <button class="btn-export">
-                            <img src="./images/export.svg" alt="">
-                            Export
-                        </button>
+        
+                    <div class="sort">
+                       <div class="p">
+                        <p>Sort:</p>
+                        <select name="sort" id="sort">
+                            <option value="0">Most Recent</option>
+                        </select>
+                       </div>
+                        <div>
+                            <button class="btn-sort">
+                                <img src="./images/dots.svg" alt="">
+                            </button>
+                            <button class="btn-export">
+                                <img src="./images/export.svg" alt="">
+                                Export
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
