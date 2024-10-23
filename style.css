@@ -44,7 +44,10 @@
     --bg-th: #F1F5F9;
     --close: #334155;
     --close-bg: none;
-    
+    --pagination-color: #334155;
+    --pagination-bg: #E2E8F0;
+    --pagination-border: #E2E8F0;
+    --pagination-right-bg: none;
 }
 
 /* Dark theme variables */
@@ -68,6 +71,10 @@
     --bg-th: #6A6676;
     --close: none;
     --close-bg: #484554;
+    --pagination-color: #8576FF;
+    --pagination-bg: #484554;
+    --pagination-border: none;
+    --pagination-right-bg: #484554;
 }
 
 /* Global reset */
@@ -718,6 +725,51 @@ input:checked + .slider:before {
 .mobile-events-table{
     display: none;
     font-size: 12px;
+    width: 100%;
+}
+
+.pagination{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; 
+}
+
+.pagination-buttons{
+    display: flex;
+    gap: 20px;
+    color: var(--text-color);
+}
+
+.pagination-buttons .btn-prev{
+    background-color: var(--pagination-bg);
+    color: var(--pagination-color);
+}
+
+.pagination-buttons .btn-next{
+    border: 1px solid var(--border-light);
+    color: var(--pagination-color);
+    background-color: var(--pagination-right-bg);
+}
+
+.pagination-buttons button{
+    border: none;
+    padding: 5px 10px;
+}
+
+.show-rows{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+    
+}
+
+.show-rows select{
+    padding: 5px;
+    outline: none;
+    border: 1px solid var(--border-light);
+    background-color: var(--side-bar-bg);
 }
 
 /* Add/Update these mobile-specific styles in your CSS file */
@@ -829,7 +881,6 @@ input:checked + .slider:before {
 
     .sort {
         width: 100%;
-        margin-top: 16px;
         flex-direction: column;
         align-items: start;
     }
@@ -949,6 +1000,14 @@ input:checked + .slider:before {
 .event-name {
     flex: 1;
     font-weight: 500;
+}
+
+.pagination-buttons{
+    gap: 5px;
+}
+
+.pagination .show-rows{
+    font-size: 0;
 }
 
 
