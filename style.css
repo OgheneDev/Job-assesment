@@ -715,6 +715,10 @@ input:checked + .slider:before {
     display: none;
 }
 
+.mobile-events-table{
+    display: none;
+}
+
 /* Add/Update these mobile-specific styles in your CSS file */
 
 @media screen and (max-width: 767px) {
@@ -858,10 +862,12 @@ input:checked + .slider:before {
 .mobile-event-row {
     padding: 12px;
     border-bottom: 1px solid #eee;
+    font-size: 12px
 }
 
 .main-row {
     cursor: pointer;
+    font-size: 12px;
 }
 
 .main-row:hover {
@@ -917,21 +923,6 @@ input:checked + .slider:before {
     font-weight: 500;
 }
 
-@media (max-width: 767px) {
-    .events-table {
-        display: none;
-    }
-    
-    .mobile-events {
-        display: block;
-    }
-}
-
-@media (min-width: 768px) {
-    .mobile-events {
-        display: none;
-    }
-}
 
 /* Dark theme support */
 .dark-theme .mobile-th {
