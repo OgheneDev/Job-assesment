@@ -774,6 +774,10 @@ input:checked + .slider:before {
     background-color: var(--side-bar-bg);
 }
 
+.btn-close{
+    display: none;
+}
+
 /* Add/Update these mobile-specific styles in your CSS file */
 
 @media screen and (max-width: 767px) {
@@ -788,6 +792,32 @@ input:checked + .slider:before {
     .mobile-menu button{
         border: none;
         background: none;
+    }
+
+    .btn-close{
+        font-size: 16px;
+        cursor: pointer;
+        color: var(--close);
+        background: var(--close-bg);
+        border: 1px solid var(--border-light);
+        border-radius: 50%;
+        padding: 1px 6px 3px 6px;
+    }
+
+    .btn-close.open{
+        display: block;
+    }
+
+    .btn-close.close{
+        display: none;
+    }
+
+    .btn-menu.open{
+        display: none;
+    }
+
+    .btn-menu.close{
+        display: block;
     }
 
    .side-bar{
@@ -806,6 +836,11 @@ input:checked + .slider:before {
 
    .side-bar.open{
     transform: translate(0) !important;
+   }
+
+   .side-bar.close{
+    transform: translateX(-100%);
+    left: 0;
    }
 
    .main-content{

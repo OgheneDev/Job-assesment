@@ -414,13 +414,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Mobile menu functionality
 const btnMenu = document.querySelector('.btn-menu');
+const btnClose = document.querySelector('.btn-close');
 const sidebar = document.querySelector('.side-bar');
 
+// When btnMenu is clicked
 btnMenu.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
+    btnMenu.classList.remove('close'); // Ensure 'close' is removed from btnMenu
+    btnMenu.classList.add('open'); // Add 'open' class to btnMenu
+
+    btnClose.classList.remove('close'); // Ensure 'close' is removed from btnClose
+    btnClose.classList.add('open'); // Add 'open' class to btnClose
+
+    sidebar.classList.remove('close'); // Ensure 'close' is removed from sidebar
+    sidebar.classList.add('open'); // Add 'open' class to sidebar
 });
+
+// When btnClose is clicked
+btnClose.addEventListener('click', () => {
+    btnClose.classList.remove('open'); // Remove 'open' from btnClose
+    btnClose.classList.add('close'); // Add 'close' class to btnClose
+
+    btnMenu.classList.remove('open'); // Remove 'open' from btnMenu
+    btnMenu.classList.add('close'); // Add 'close' class to btnMenu
+
+    sidebar.classList.remove('open'); // Remove 'open' from sidebar
+    sidebar.classList.add('close'); // Add 'close' class to sidebar
+});
+
+
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
